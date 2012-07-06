@@ -48,9 +48,9 @@ OPTIONS=	CGI		"Install collection.cgi (requires RRDTOOL)" 	Off \
 		SNMP		"Input: SNMP" 					On  \
 		TOKYOTYRANT	"Input: Tokyotyrant database"			Off \
 		XMMS		"Input: XMMS" 					Off \
+		GRAPHITE	"Output: Graphite (Carbon)"			On  \
 		RRDTOOL		"Output: RRDTool"				On  \
-		RRDCACHED	"Output: RRDTool Cached (require RRDTOOL)"	On  \
-		WRITE_CARBON	"Output: Write Carbon"				Off 
+		RRDCACHED	"Output: RRDTool Cached (require RRDTOOL)"	On
 
 MAN1=		collectd.1 collectd-nagios.1 collectdmon.1 collectdctl.1
 MAN5=		collectd.conf.5 collectd-email.5 collectd-exec.5 \
@@ -405,11 +405,11 @@ CONFIGURE_ARGS+=--disable-xmms
 PLIST_SUB+=	XMMS="@comment "
 .endif
 
-.if defined(WITH_WRITE_CARBON)
-CONFIGURE_ARGS+=--enable-write_carbon
+.if defined(WITH_GRAPHITE)
+CONFIGURE_ARGS+=--enable-write_graphite
 .else
-CONFIGURE_ARGS+=--disable-write_carbon
-PLIST_SUB+=	WRITE_CARBON="@comment "
+CONFIGURE_ARGS+=--disable-write_graphite
+PLIST_SUB+=	GRAPHITE="@comment "
 .endif
 
 AUTOTOOLSFILES=	aclocal.m4
